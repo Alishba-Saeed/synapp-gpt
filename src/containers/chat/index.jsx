@@ -508,7 +508,7 @@ export const ChatComponent = () => {
             <AttentionNote />
           </div>
         </div>
-        <div className="w-full bg-white mt-5">
+        <div className="w-full bg-white mt-5 rounded-lg">
           <ChatBox
             newMessage={newMessage}
             messagesEndRef={messagesEndRef}

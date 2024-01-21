@@ -6,6 +6,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 import { ASSETS } from "../../assets/path";
+import Search from "../search/Search";
 
 const Navbar = ({
   signup,
@@ -15,6 +16,7 @@ const Navbar = ({
   onOpenAbout,
 }) => {
   const navigate = useNavigate();
+  const username = localStorage.getItem('username');
 
   const handleClick = () => {
     navigate('/')
@@ -52,6 +54,12 @@ const Navbar = ({
               )}
             </div>
           </div>
+
+          {username == "admin@synapp-messaging.com"  || username == "admin@example.com"  || username == "admin_sacha@example.com" ? (
+            null
+          ) :  (
+            <Search></Search>
+          )}
 
           {Conversations && (
 

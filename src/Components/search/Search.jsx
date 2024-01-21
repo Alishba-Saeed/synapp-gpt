@@ -9,7 +9,7 @@ const Search = () => {
   const handleSearch =  (e) => {
     const query = e.target.value.toLowerCase();
     const filteredResults = originalResults.filter(
-      (file) => file.file_name.toLowerCase().includes(query)
+      (file) => file.name.toLowerCase().includes(query)
     );
     setSearchQuery(query);
     setSearchResults(filteredResults);
@@ -25,11 +25,11 @@ const Search = () => {
   useEffect(() => {
     const fetchfileData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/api/admin/get-file/`, {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/api/admin/files/`, {
 
         });
 
-        const filedata = response.data;
+        const filedata = response.data.files;
         if (filedata) {
 
           setSearchResults(filedata);
@@ -84,16 +84,16 @@ const Search = () => {
     <ul>
       {searchResults
         .filter((file) =>
-          file.file_name.toLowerCase().startsWith(searchQuery.toLowerCase())
+          file.name.toLowerCase().startsWith(searchQuery.toLowerCase())
         )
         .map((file) => (
           <li key={file.id}  className="search_list">
             <a
-              href={`${import.meta.env.VITE_REACT_APP_API_URL}/api/admin/view-file/${file.id}`} // Replace with your API endpoint to fetch the PDF file
+              href={`${file.path}`} // Replace with your API endpoint to fetch the PDF file
               target="_blank"
               rel="noopener noreferrer"
             >
-              {file.file_name}
+              {file.name}
             </a>
           </li>
         ))}
